@@ -1,40 +1,49 @@
 package com.rogday;
 
-import com.rogday.Task1.*;
-import com.rogday.Task2.*;
+import com.rogday.Task3.Utils;
+
+import java.util.Random;
 import java.util.Arrays;
+import java.util.function.Function;
 
 public class Main {
+    private static void estimator(int[] arr, String method, Function<int[], Void> s) {
+        var arr2 = arr.clone();
+        long startTime = System.nanoTime();
+        s.apply(arr2);
+        long estimatedTime = System.nanoTime() - startTime;
+        System.out.println(method + estimatedTime);
+    }
+
     public static void main(String[] args) {
-        var circle = new Circle(42.0, "yellow");
-        System.out.println(circle);
-        System.out.println(circle.getArea());
+        Random rand = new Random();
 
-        var rectangle = new Rectangle(6.0f, 7.0f);
-        System.out.println(rectangle);
-        System.out.println(rectangle.getArea());
-        System.out.println(rectangle.getPerimetr());
+        int n = rand.nextInt(4501) + 500; //n = [500; 5000]
+        int[] arr = new int[n];
 
-        var employee = new Employee(42, "Amelia", "Pond", 1337);
-        System.out.println(employee);
-        System.out.println(employee.getName());
-        employee.raiseSalary(50);
-        System.out.println(employee.getAnnualSalary());
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = rand.nextInt(1001);
 
-        Author[] authors = {new Author("Stephen King", "stephen_king@ya.ru", 'm'),
-                new Author("Another Author", "IDontReadBooks@shameOn.Me", 'f')};
-        var book = new Book("Original name for a book", authors, 100500, 228);
-        System.out.println(book);
-        System.out.println(book.getAuthorNames());
+        estimator(arr, "BubbleSort: ", Utils::bubbleSort);
+        estimator(arr, "SelectionSort: ", Utils::selectionSort);
+        Function<int[], Void> f = (array) -> {
+            Arrays.sort(array);
+            return null;
+        };
+        estimator(arr, "Arrays.sort(): ", f);
 
-        var mypoint = new MyPoint(3, 4);
-        System.out.println(mypoint);
-        System.out.println(mypoint.distance());
-        System.out.println(Arrays.toString(mypoint.getXY()));
 
-        var mytriangle = new MyTriangle(0, 0, 1, 0, 1, 1);
-        System.out.println(mytriangle);
-        System.out.println(mytriangle.getPerimetr());
-        System.out.println(mytriangle.getType());
+        long startTime = System.nanoTime();
+        long ans = Utils.factRec(15);
+        long estimatedTime = System.nanoTime() - startTime;
+        System.out.println("Recursion: 15! = " + ans + " " + estimatedTime);
+
+        startTime = System.nanoTime();
+        ans = Utils.factIter(15);
+        estimatedTime = System.nanoTime() - startTime;
+        System.out.println("Iteration: 15! = " + ans + " " + estimatedTime);
+
+        Utils.drawRect(7, 7);
+        Utils.drawFig(7, 7);
     }
 }
