@@ -1,6 +1,7 @@
 package com.rogday.Task1;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Book {
     private String name;
@@ -58,5 +59,27 @@ public class Book {
         builder.append(authors[authors.length - 1].getName());
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Double.compare(book.price, price) == 0 && //Math.abs(f1 - f2) < THRESHOLD
+                qty == book.qty &&
+                name.equals(book.name) &&
+                Arrays.equals(authors, book.authors); //or authors.length == book... and for (int i=0; i < ...)
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        long l = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (l ^ (l >>> 32));
+        result = 31 * result + qty;
+        result = 31 * result + Arrays.hashCode(authors);
+        return result;
     }
 }
