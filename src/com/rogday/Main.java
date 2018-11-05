@@ -16,10 +16,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Random rand = new Random();
+        var rand = new Random();
 
         int n = rand.nextInt(4501) + 500; //n = [500; 5000]
-        int[] arr = new int[n];
+        var arr = new int[n];
 
         for (int i = 0; i < arr.length; i++)
             arr[i] = rand.nextInt(1001);
@@ -45,5 +45,18 @@ public class Main {
 
         Utils.drawRect(7, 7);
         Utils.drawFig(7, 7);
+
+        System.out.println("4.a");
+        Utils.fourA();
+        System.out.println("4.b");
+        Utils.fourB();
+        System.out.println("4.c");
+        Utils.fourC();
+        System.out.println("4.d");
+        Utils.fourD();
+        System.out.println("4.e");
+        Utils.fourE();
+        System.out.println("4.f");
+        Utils.fourF();
     }
 }
