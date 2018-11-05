@@ -1,5 +1,7 @@
 package com.rogday;
 
+import com.rogday.Task1.*;
+import com.rogday.Task2.*;
 import java.util.Arrays;
 
 public class Main {

@@ -1,4 +1,4 @@
-package com.rogday;
+package com.rogday.Task1;
 
 import java.util.Arrays;
 

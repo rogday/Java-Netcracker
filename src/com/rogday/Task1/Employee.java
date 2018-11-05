@@ -1,4 +1,4 @@
-package com.rogday;
+package com.rogday.Task1;
 
 public class Employee {
     private int id;

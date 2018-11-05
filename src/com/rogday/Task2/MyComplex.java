@@ -1,4 +1,4 @@
-package com.rogday;
+package com.rogday.Task2;
 
 public class MyComplex {
     private double real = 0.0;
