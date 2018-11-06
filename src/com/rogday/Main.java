@@ -54,5 +54,6 @@ public class Main {
         Utils.fiveC();
         System.out.println("5.d");
         Utils.fiveD();
+        //idk what to do in №6.
     }
 }
