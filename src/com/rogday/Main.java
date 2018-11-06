@@ -55,5 +55,12 @@ public class Main {
         System.out.println("5.d");
         Utils.fiveD();
         //idk what to do in №6.
+
+        /*System.out.println("Polynomial:");
+        var p1 = new MyPolynomial(new double[]{1.0, 1.0});
+        var p2 = new MyPolynomial(new double[]{1.0, 1.0, 2.0});
+        System.out.println(p1.multiply(p2));
+        System.out.println(p1.add(p2));
+        System.out.println(p2.evaluate(2));*/
     }
 }
