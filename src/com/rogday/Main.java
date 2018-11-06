@@ -46,5 +46,13 @@ public class Main {
         Utils.fourE();
         System.out.println("4.f");
         Utils.fourF();
+        System.out.println("5.a");
+        Utils.fiveA();
+        System.out.println("5.b");
+        Utils.fiveB();
+        System.out.println("5.c");
+        Utils.fiveC();
+        System.out.println("5.d");
+        Utils.fiveD();
     }
 }

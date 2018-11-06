@@ -190,4 +190,79 @@ public class Utils {
             System.out.println((imax2 - 1) + " was found " + counts[imax2] + " times");
 
     }
+
+    private static int[][] generate2(int n, int m, int a, int b) {
+        var arr = new int[n][m];
+        for (int i = 0; i < n; ++i)
+            arr[i] = generate(m, a, b);
+        return arr;
+    }
+
+    private static void prettyArray(int[][] arr) {
+        for (var i : arr)
+            System.out.println(Arrays.toString(i));
+    }
+
+    public static void fiveA() {
+        int[][] arr = generate2(8, 8, 1, 99);
+        long sum1 = 0, sum2 = 0, prod1 = 1, prod2 = 1;
+        for (int i = 0; i < arr.length; ++i) {
+            sum1 += arr[i][i];
+            sum2 += arr[i][arr.length - i - 1];
+            prod1 *= arr[i][i];
+            prod2 *= arr[i][arr.length - i - 1];
+        }
+        prettyArray(arr);
+        System.out.println("Sum & prod of the main diag: " + sum1 + " " + prod1);
+        System.out.println("Sum & prod of not main diag: " + sum2 + " " + prod2);
+    }
+
+    public static void fiveB() {
+        int n = 8, m = 5;
+        int[][] arr = generate2(n, m, -99, 99);
+        prettyArray(arr);
+
+        int imax = 0;
+        for (int i = 0; i < n * m; ++i)
+            if (arr[i / m][i % m] >= arr[imax / m][imax % m])
+                imax = i;
+
+        System.out.println("Max element: " + arr[imax / m][imax % m] + ", indexes: ");
+        for (int i = 0; i < n * m; ++i)
+            if (arr[imax / m][imax % m] == arr[i / m][i % m])
+                System.out.println(i / m + " " + i % m);
+    }
+
+    public static void fiveC() {
+        int n = 8, m = 5;
+        int[][] arr = generate2(n, m, -10, 10);
+        prettyArray(arr);
+        int imax = 0, max = 0;
+        for (int i = 0; i < n; ++i) {
+            int prod = 1;
+            for (int j = 0; j < m; ++j)
+                prod *= arr[i][j];
+            if (Math.abs(prod) > max) {
+                imax = i;
+                max = Math.abs(prod);
+            }
+        }
+        System.out.println(imax);
+    }
+
+    public static void fiveD() {
+        int n = 10, m = 7;
+        int[][] arr = generate2(n, m, 0, 100);
+        prettyArray(arr);
+        for (int i = 0; i < n; ++i) {
+            Arrays.sort(arr[i]);
+            for (int j = 0; j < m / 2; ++j) {
+                int t = arr[i][j];
+                arr[i][j] = arr[i][m - j - 1];
+                arr[i][m - j - 1] = t;
+            }
+        }
+        System.out.println("Sorted:");
+        prettyArray(arr);
+    }
 }
