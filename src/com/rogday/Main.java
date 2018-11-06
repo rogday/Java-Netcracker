@@ -2,36 +2,24 @@ package com.rogday;
 
 import com.rogday.Task3.Utils;
 
-import java.util.Random;
 import java.util.Arrays;
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 public class Main {
-    private static void estimator(int[] arr, String method, Function<int[], Void> s) {
+    private static void estimator(int[] arr, String method, Consumer<int[]> s) {
         var arr2 = arr.clone();
         long startTime = System.nanoTime();
-        s.apply(arr2);
+        s.accept(arr2);
         long estimatedTime = System.nanoTime() - startTime;
         System.out.println(method + estimatedTime);
     }
 
     public static void main(String[] args) {
-        var rand = new Random();
-
-        int n = rand.nextInt(4501) + 500; //n = [500; 5000]
-        var arr = new int[n];
-
-        for (int i = 0; i < arr.length; i++)
-            arr[i] = rand.nextInt(1001);
+        int[] arr = Utils.generate(5000, 0, 1000);
 
         estimator(arr, "BubbleSort: ", Utils::bubbleSort);
         estimator(arr, "SelectionSort: ", Utils::selectionSort);
-        Function<int[], Void> f = (array) -> {
-            Arrays.sort(array);
-            return null;
-        };
-        estimator(arr, "Arrays.sort(): ", f);
-
+        estimator(arr, "Arrays.sort(): ", Arrays::sort);
 
         long startTime = System.nanoTime();
         long ans = Utils.factRec(15);

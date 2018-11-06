@@ -1,10 +1,12 @@
 package com.rogday.Task3;
 
-import java.util.Random;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.function.BiPredicate;
 
 public class Utils {
-    public static Void bubbleSort(int[] arr) {
+    public static void bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length; ++i) {
             for (int j = i + 1; j < arr.length; ++j) {
                 if (arr[i] > arr[j]) {
@@ -15,10 +17,9 @@ public class Utils {
 
             }
         }
-        return null;
     }
 
-    public static Void selectionSort(int[] arr) {
+    public static void selectionSort(int[] arr) {
         for (int i = 0; i < arr.length; ++i) {
             int imax = i;
             for (int j = i + 1; j < arr.length; ++j)
@@ -29,7 +30,6 @@ public class Utils {
             arr[imax] = arr[i];
             arr[i] = t;
         }
-        return null;
     }
 
     public static long factRec(long n) {
@@ -54,15 +54,10 @@ public class Utils {
         System.out.println();
     }
 
-    @FunctionalInterface
-    interface Figure {
-        boolean magic(int i, int j);
-    }
-
-    private static void drawFigHelper(int n, int m, Figure fig) {
+    private static void drawFigHelper(int n, int m, BiPredicate<Integer, Integer> fig) {
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < m; ++j)
-                if (fig.magic(i, j))
+                if (fig.test(i, j))
                     System.out.print("# ");
                 else
                     System.out.print("  ");
@@ -72,19 +67,18 @@ public class Utils {
     }
 
     public static void drawFig(int n, int m) {
-        Figure[] arr = new Figure[]{
-                (i, j) -> i >= j,
-                (i, j) -> i <= m - j - 1,
-                (i, j) -> i <= j,
-                (i, j) -> i >= m - j - 1,
-                (i, j) -> i % (n - 1) == 0 || j % (m - 1) == 0,
-                (i, j) -> i % (n - 1) == 0 || i == j,
-                (i, j) -> i % (n - 1) == 0 || i == m - j - 1,
-                (i, j) -> i == j || i == (m - j - 1) ||
-                        i % (n - 1) == 0,
-                (i, j) -> i == j || i == (m - j - 1) ||
-                        i % (n - 1) == 0 || j % (m - 1) == 0
-        };
+        var arr = new ArrayList<BiPredicate<Integer, Integer>>();
+        arr.add((i, j) -> i >= j);
+        arr.add((i, j) -> i <= m - j - 1);
+        arr.add((i, j) -> i <= j);
+        arr.add((i, j) -> i >= m - j - 1);
+        arr.add((i, j) -> i % (n - 1) == 0 || j % (m - 1) == 0);
+        arr.add((i, j) -> i % (n - 1) == 0 || i.equals(j));
+        arr.add((i, j) -> i % (n - 1) == 0 || i == m - j - 1);
+        arr.add((i, j) -> i.equals(j) || i == (m - j - 1) ||
+                i % (n - 1) == 0);
+        arr.add((i, j) -> i.equals(j) || i == (m - j - 1) ||
+                i % (n - 1) == 0 || j % (m - 1) == 0);
 
         for (var f : arr)
             drawFigHelper(n, m, f);
@@ -107,7 +101,7 @@ public class Utils {
         System.out.println(Arrays.toString(arr));
     }
 
-    private static int[] generate(int n, int a, int b) {
+    public static int[] generate(int n, int a, int b) {
         var rand = new Random();
         var arr = new int[n];
         for (int i = 0; i < n; ++i)
@@ -118,8 +112,7 @@ public class Utils {
     public static void fourB() {
         int[] arr = generate(20, 0, 10);
 
-        int even = 0;
-        int odd = 0;
+        int even = 0, odd = 0;
         for (var i : arr)
             if (i % 2 == 0)
                 ++even;
