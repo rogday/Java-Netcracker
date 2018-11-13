@@ -149,11 +149,11 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public E[] toArray() {
         if (size == 0)
             return null;
 
-        @SuppressWarnings("unchecked")
         E[] arr = (E[]) new Object[size];
 
         int i = 0;
