@@ -1,4 +1,4 @@
-package com.rogday.Task2;
+package com.rogday.task2;
 
 public class MyPolynomial {
     private double[] coeffs;

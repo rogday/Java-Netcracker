@@ -1,6 +1,6 @@
 package com.rogday;
 
-import com.rogday.Task3.Utils;
+import com.rogday.task3.Utils;
 
 import java.util.Arrays;
 import java.util.function.Consumer;

@@ -1,6 +1,4 @@
-package com.rogday.Task1;
-
-import java.util.Objects;
+package com.rogday.task1;
 
 public class Rectangle {
     private float length = 1.0f;

@@ -1,6 +1,4 @@
-package com.rogday.Task1;
-
-import java.util.Objects;
+package com.rogday.task1;
 
 public class MyPoint {
     private int x = 0;
@@ -48,8 +46,7 @@ public class MyPoint {
     }
 
     public int[] getXY() {
-        int[] arr = {x, y};
-        return arr;
+        return new int[]{x, y};
     }
 
     public void setXY(int x, int y) {

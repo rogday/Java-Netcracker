@@ -1,6 +1,6 @@
 package com.rogday;
 
-import com.rogday.Task4.MyLinkedList;
+import com.rogday.task4.MyLinkedList;
 
 public class MainCollections {
     public static void main(String[] args) {

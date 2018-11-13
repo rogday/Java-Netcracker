@@ -1,7 +1,6 @@
-package com.rogday.Task1;
+package com.rogday.task1;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Book {
     private String name;

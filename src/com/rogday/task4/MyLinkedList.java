@@ -1,32 +1,16 @@
-package com.rogday.Task4;
+package com.rogday.task4;
 
-import java.util.Arrays;
 import java.util.Iterator;
+import java.util.StringJoiner;
 
 public class MyLinkedList<E> implements ILinkedList<E> {
-    class Node<E> {
-        private E element;
-        private Node nextNode;
+    class Node<M> {
+        M element;
+        Node nextNode;
 
-        public Node(E element) {
+        Node(M element) {
             this.element = element;
             this.nextNode = null;
-        }
-
-        public E getElement() {
-            return element;
-        }
-
-        public void setElement(E element) {
-            this.element = element;
-        }
-
-        public Node getNextNode() {
-            return nextNode;
-        }
-
-        public void setNextNode(Node nextNode) {
-            this.nextNode = nextNode;
         }
 
         /*protected void finalize() {
@@ -39,18 +23,38 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     private int size;
 
     public MyLinkedList() {
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
+        head = tail = null;
+        size = 0;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private Node<E> curr = head;
+
+            @Override
+            public boolean hasNext() {
+                return curr != null;
+            }
+
+            @Override
+            public E next() {
+                var res = curr.element;
+                curr = curr.nextNode;
+                return res;
+            }
+        };
+    }
+
+    @SuppressWarnings("unchecked")
     private Node<E> getHelper(int index) {
         if (index == size - 1)
             return tail;
 
         var obj = head;
         for (int i = 0; i < index; ++i)
-            obj = obj.getNextNode();
+            obj = obj.nextNode;
 
         return obj;
     }
@@ -65,6 +69,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void add(int index, E element) {
         if (!saneIndex(index) && index != size)
             return;
@@ -72,41 +77,43 @@ public class MyLinkedList<E> implements ILinkedList<E> {
         if (index == 0) { //insertion at the begging of the list
             var tmp = head;
             head = new Node<>(element);
-            head.setNextNode(tmp);
+            head.nextNode = tmp;
             if (size == 0)
                 tail = head;
         } else {
             if (index == size) { //insertion at the end of the list
-                tail.setNextNode(new Node<>(element));
-                tail = tail.getNextNode();
+                tail.nextNode = new Node<>(element);
+                tail = tail.nextNode;
             } else {  //insertion in other places  of the list
                 var prev = getHelper(index - 1);
-                var next = prev.getNextNode();
-                prev.setNextNode(new Node<>(element));
-                prev.getNextNode().setNextNode(next);
+                var next = prev.nextNode;
+                prev.nextNode = new Node<>(element);
+                prev.nextNode.nextNode = next;
             }
         }
         ++size;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public E remove(int index) {
+
         if (!saneIndex(index))
             return null;
 
         Node<E> res;
         if (index == 0) {
             res = head;
-            head = head.getNextNode();
+            head = head.nextNode;
         } else {
             var t = getHelper(index - 1);
-            res = t.getNextNode(); //Why cant I use var here?
-            t.setNextNode(res.getNextNode());
+            res = t.nextNode;
+            t.nextNode = res.nextNode;
             if (index == size - 1)
                 tail = t;
         }
         --size;
-        return res.getElement();
+        return res.element;
     }
 
     @Override
@@ -119,24 +126,24 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     public E get(int index) {
         if (!saneIndex(index))
             return null;
-        return getHelper(index).getElement();
+        return getHelper(index).element;
     }
 
     @Override
     public E set(int index, E element) {
         if (!saneIndex(index))
             return null;
-        getHelper(index).setElement(element);
+        getHelper(index).element = element;
         return element;
     }
 
     @Override
     public int indexOf(E element) {
-        var tmp = head;
-        for (int i = 0; i < size; ++i) {
-            if (element.equals(tmp.getElement()))
+        int i = 0;
+        for (E el : this) {
+            if (el.equals(element))
                 return i;
-            tmp = tmp.getNextNode();
+            ++i;
         }
         return -1;
     }
@@ -148,51 +155,24 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 
         @SuppressWarnings("unchecked")
         E[] arr = (E[]) new Object[size];
-        var tmp = head;
-        for (int i = 0; i < size; ++i) {
-            arr[i] = tmp.getElement();
-            tmp = tmp.getNextNode();
-        }
 
-        return Arrays.copyOf(arr, size); //idk how to copy it manually.
+        int i = 0;
+        for (E el : this)
+            arr[i++] = el;
+
+        return arr;
     }
 
     @Override
     public String toString() {
-        var sb = new StringBuilder("MyLinkedList{");
-        var obj = head;
-        for (int i = 0; i < size - 1; ++i) {
-            sb.append(obj.getElement()).append(", ");
-            obj = obj.getNextNode();
-        }
-        if (size != 0)
-            sb.append(tail.getElement());
-        sb.append("}");
-
-        return sb.toString();
+        var sj = new StringJoiner(", ", "MyLinkedList{", "}");
+        for (E el : this)
+            sj.add(el.toString());
+        return sj.toString();
     }
 
     @Override
     public int size() {
         return size;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private Node<E> curr = head;
-
-            @Override
-            public boolean hasNext() {
-                return curr != null;
-            }
-
-            @Override
-            public E next() {
-                var res = curr.getElement();
-                curr = curr.getNextNode();
-                return res;
-            }
-        };
     }
 }

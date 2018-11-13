@@ -1,6 +1,4 @@
-package com.rogday.Task2;
-
-import java.util.Objects;
+package com.rogday.task2;
 
 public class MyComplex {
     private double real = 0.0;
