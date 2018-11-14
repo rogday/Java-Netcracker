@@ -89,7 +89,6 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E remove(int index) {
-
         if (!saneIndex(index))
             return null;
 
