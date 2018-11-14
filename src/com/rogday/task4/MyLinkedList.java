@@ -23,7 +23,8 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     private int size;
 
     public MyLinkedList() {
-        head = tail = null;
+        head = new Node<>(null);
+        tail = null;
         size = 0;
     }
 
@@ -31,7 +32,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     @SuppressWarnings("unchecked")
     public Iterator<E> iterator() {
         return new Iterator<>() {
-            private Node<E> curr = head;
+            private Node<E> curr = head.nextNode;
 
             @Override
             public boolean hasNext() {
@@ -49,11 +50,11 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 
     @SuppressWarnings("unchecked")
     private Node<E> getHelper(int index) {
-        if (index == size - 1)
+        if (index == size - 1 && index != -1)
             return tail;
 
         var obj = head;
-        for (int i = 0; i < index; ++i)
+        for (int i = 0; i <= index; ++i)
             obj = obj.nextNode;
 
         return obj;
@@ -74,23 +75,14 @@ public class MyLinkedList<E> implements ILinkedList<E> {
         if (!saneIndex(index) && index != size)
             return;
 
-        if (index == 0) { //insertion at the begging of the list
-            var tmp = head;
-            head = new Node<>(element);
-            head.nextNode = tmp;
-            if (size == 0)
-                tail = head;
-        } else {
-            if (index == size) { //insertion at the end of the list
-                tail.nextNode = new Node<>(element);
-                tail = tail.nextNode;
-            } else {  //insertion in other places  of the list
-                var prev = getHelper(index - 1);
-                var next = prev.nextNode;
-                prev.nextNode = new Node<>(element);
-                prev.nextNode.nextNode = next;
-            }
-        }
+        var prev = getHelper(index - 1);
+        var next = prev.nextNode;
+        prev.nextNode = new Node<>(element);
+        prev.nextNode.nextNode = next;
+
+        if (index == size)  //insertion at the end of the list
+            tail = prev.nextNode;
+
         ++size;
     }
 
@@ -101,24 +93,19 @@ public class MyLinkedList<E> implements ILinkedList<E> {
         if (!saneIndex(index))
             return null;
 
-        Node<E> res;
-        if (index == 0) {
-            res = head;
-            head = head.nextNode;
-        } else {
-            var t = getHelper(index - 1);
-            res = t.nextNode;
-            t.nextNode = res.nextNode;
-            if (index == size - 1)
-                tail = t;
-        }
+        var t = getHelper(index - 1);
+        Node<E> res = t.nextNode;
+        t.nextNode = res.nextNode;
+        if (index == size - 1)
+            tail = t;
+
         --size;
         return res.element;
     }
 
     @Override
     public void clear() {
-        head = tail = null; //so, we have no references to the head object,
+        head.nextNode = tail = null; //so, we have no references to the head object,
         size = 0;// and therefore it will be deleted, and so on, right?
     }
 
