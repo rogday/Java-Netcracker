@@ -17,13 +17,6 @@ public class MainCollections {
         System.out.println(test);
         System.out.println(test.size());
 
-        /* //clear()
-        test.clear();
-        System.runFinalization();
-        System.gc();
-        while (true) {}
-        */
-
         //get(i)
         for (int i = 0; i < test.size() / 2; ++i)
             System.out.print(test.get(test.size() - i - 1) + " ");

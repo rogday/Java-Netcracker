@@ -12,21 +12,11 @@ public class MyLinkedList<E> implements ILinkedList<E> {
             this.element = element;
             this.nextNode = null;
         }
-
-        /*protected void finalize() {
-            System.out.println("I'm dead: " + element);
-        }*/ //tests of memory freeing
     }
 
-    private Node<E> head;
-    private Node<E> tail;
-    private int size;
-
-    public MyLinkedList() {
-        head = new Node<>(null);
-        tail = null;
-        size = 0;
-    }
+    private Node<E> head = new Node<>(null);
+    private Node<E> tail = null;
+    private int size = 0;
 
     @Override
     @SuppressWarnings("unchecked")
