@@ -45,15 +45,6 @@ public class Utils {
         return r;
     }
 
-    public static void drawRect(int n, int m) {
-        while (n-- > 0) {
-            for (int i = 0; i < m; ++i)
-                System.out.print("# ");
-            System.out.println();
-        }
-        System.out.println();
-    }
-
     private static void drawFigHelper(int n, int m, BiPredicate<Integer, Integer> fig) {
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < m; ++j)
@@ -64,6 +55,10 @@ public class Utils {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public static void drawRect(int n, int m) {
+        drawFigHelper(n, m, (i, j) -> true);
     }
 
     public static void drawFig(int n, int m) {
@@ -148,7 +143,7 @@ public class Utils {
     }
 
     public static void fourE() {
-        var matrix = new int[][]{generate(10, 0, 10), generate(10, 0, 10)};
+        var matrix = generate2(2, 10, 0, 10);
 
         for (var arr : matrix)
             System.out.println(Arrays.toString(arr));

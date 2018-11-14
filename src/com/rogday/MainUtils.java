@@ -5,7 +5,7 @@ import com.rogday.task3.Utils;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-public class Main {
+public class MainUtils {
     private static void estimator(int[] arr, String method, Consumer<int[]> s) {
         var arr2 = arr.clone();
         long startTime = System.nanoTime();
