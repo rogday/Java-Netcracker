@@ -3,8 +3,8 @@ package com.rogday.task4;
 import java.util.Map;
 
 public class MapTester<T extends Map<Integer, Integer>> extends Tester<T> {
-    public MapTester(int N, T map) {
-        super(N, map);
+    public MapTester(T map) {
+        super(map);
     }
 
     @Override

@@ -3,8 +3,8 @@ package com.rogday.task4;
 import java.util.Set;
 
 public class SetTester<T extends Set<Integer>> extends Tester<T> {
-    public SetTester(int N, T col) {
-        super(N, col);
+    public SetTester(T col) {
+        super(col);
     }
 
     @Override

@@ -3,15 +3,18 @@ package com.rogday.task4;
 import java.util.Random;
 
 public abstract class Tester<T> {
-    protected int[] array;
-    protected int N;
+    protected static int[] array;
+    protected static int N;
     protected T col;
     private String colName;
 
-    Tester(int N, T col) {
-        this.N = N;
+    Tester(T col) {
         this.col = col;
         this.colName = col.getClass().toString();
+    }
+
+    public static void genArr(int N) {
+        Tester.N = N;
         var rand = new Random();
         array = new int[N];
         for (int i = 0; i < N; ++i)

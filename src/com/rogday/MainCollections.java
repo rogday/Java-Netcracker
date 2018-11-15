@@ -1,9 +1,6 @@
 package com.rogday;
 
-import com.rogday.task4.ListTester;
-import com.rogday.task4.MapTester;
-import com.rogday.task4.MyLinkedList;
-import com.rogday.task4.SetTester;
+import com.rogday.task4.*;
 
 import java.util.*;
 
@@ -61,6 +58,7 @@ public class MainCollections {
         // I won't give any proofs here since I don't like the testing code.
 
         int N = 100_000;
+        Tester.genArr(N);
 
         var array1 = new ArrayList<Map<Integer, Integer>>();
         array1.add(new HashMap<>());
@@ -68,7 +66,7 @@ public class MainCollections {
         array1.add(new TreeMap<>());
 
         for (var col : array1) {
-            var tester = new MapTester<>(N, col);
+            var tester = new MapTester<>(col);
             tester.runAll();
         }
 
@@ -78,7 +76,7 @@ public class MainCollections {
         array2.add(new TreeSet<>());
 
         for (var col : array2) {
-            var tester = new SetTester<>(N, col);
+            var tester = new SetTester<>(col);
             tester.runAll();
         }
 
@@ -87,7 +85,7 @@ public class MainCollections {
         array3.add(new LinkedList<>());
 
         for (var col : array3) {
-            var tester = new ListTester<>(N, col);
+            var tester = new ListTester<>(col);
             tester.runAll();
         }
 

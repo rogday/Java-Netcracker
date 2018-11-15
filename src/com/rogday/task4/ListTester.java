@@ -3,8 +3,8 @@ package com.rogday.task4;
 import java.util.List;
 
 public class ListTester<T extends List<Integer>> extends Tester<T> {
-    public ListTester(int N, T col) {
-        super(N, col);
+    public ListTester(T col) {
+        super(col);
     }
 
     @Override
