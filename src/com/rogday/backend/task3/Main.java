@@ -2,9 +2,10 @@ package com.rogday.backend.task3;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class Main {
-    private static void estimator(int[] arr, String method, Consumer<int[]> s) {
+    private static void sortEstimate(int[] arr, String method, Consumer<int[]> s) {
         var arr2 = arr.clone();
         long startTime = System.nanoTime();
         s.accept(arr2);
@@ -12,22 +13,24 @@ public class Main {
         System.out.println(method + estimatedTime);
     }
 
+    private static void factEstimate(int n, Function<Integer, Integer> c, String method) {
+        long startTime = System.nanoTime();
+        long ans = c.apply(15);
+        long estimatedTime = System.nanoTime() - startTime;
+        System.out.println(String.format("%s, 15! = %d, time = %d nanoseconds",
+                method, ans, estimatedTime));
+    }
+
     public static void main(String[] args) {
         int[] arr = Utils.generate(5000, 0, 1000);
 
-        estimator(arr, "BubbleSort: ", Utils::bubbleSort);
-        estimator(arr, "SelectionSort: ", Utils::selectionSort);
-        estimator(arr, "Arrays.sort(): ", Arrays::sort);
+        sortEstimate(arr, "BubbleSort: ", Utils::bubbleSort);
+        sortEstimate(arr, "SelectionSort: ", Utils::selectionSort);
+        sortEstimate(arr, "Arrays.sort(): ", Arrays::sort);
 
-        long startTime = System.nanoTime();
-        long ans = Utils.factRec(15);
-        long estimatedTime = System.nanoTime() - startTime;
-        System.out.println("Recursion: 15! = " + ans + " " + estimatedTime);
-
-        startTime = System.nanoTime();
-        ans = Utils.factIter(15);
-        estimatedTime = System.nanoTime() - startTime;
-        System.out.println("Iteration: 15! = " + ans + " " + estimatedTime);
+        int fact = 15;
+        factEstimate(fact, Utils::factRec, "Recursion");
+        factEstimate(fact, Utils::factIter, "Iteration");
 
         Utils.drawRect(7, 7);
         Utils.drawFig(7, 7);

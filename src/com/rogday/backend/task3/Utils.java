@@ -32,14 +32,14 @@ public class Utils {
         }
     }
 
-    public static long factRec(long n) {
+    public static Integer factRec(Integer n) {
         if (n <= 1)
             return 1;
         return n * factRec(n - 1);
     }
 
-    public static long factIter(long n) {
-        long r = 1;
+    public static Integer factIter(Integer n) {
+        Integer r = 1;
         while (n != 1)
             r *= n--;
         return r;
