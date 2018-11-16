@@ -1,16 +1,16 @@
-package com.rogday.task4;
+package com.rogday.backend.task4.tester;
 
-import java.util.Map;
+import java.util.List;
 
-public class MapTester<T extends Map<Integer, Integer>> extends Tester<T> {
-    public MapTester(T map) {
-        super(map);
+public class ListTester<T extends List<Integer>> extends Tester<T> {
+    public ListTester(T col) {
+        super(col);
     }
 
     @Override
     public void addTest() {
         for (int i = 0; i < N; ++i)
-            col.put(i, array[i]);
+            col.add(i);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class MapTester<T extends Map<Integer, Integer>> extends Tester<T> {
 
     @Override
     public void removeTest() {
-        for (int i = 0; i < N; ++i)
+        for (int i = N - 1; i >= 0; --i)
             col.remove(array[i]);
     }
 }

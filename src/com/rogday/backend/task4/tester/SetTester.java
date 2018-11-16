@@ -1,9 +1,9 @@
-package com.rogday.task4;
+package com.rogday.backend.task4.tester;
 
-import java.util.List;
+import java.util.Set;
 
-public class ListTester<T extends List<Integer>> extends Tester<T> {
-    public ListTester(T col) {
+public class SetTester<T extends Set<Integer>> extends Tester<T> {
+    public SetTester(T col) {
         super(col);
     }
 
@@ -16,12 +16,12 @@ public class ListTester<T extends List<Integer>> extends Tester<T> {
     @Override
     public void getTest() {
         for (int i = 0; i < N; ++i)
-            col.get(array[i]);
+            col.contains(array[i]);
     }
 
     @Override
     public void removeTest() {
-        for (int i = N - 1; i >= 0; --i)
+        for (int i = 0; i < N; ++i)
             col.remove(array[i]);
     }
 }

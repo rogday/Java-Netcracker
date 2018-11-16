@@ -1,4 +1,4 @@
-package com.rogday.task4;
+package com.rogday.backend.task4.tester;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.rogday.task1;
+package com.rogday.backend.task1;
 
 public class MyTriangle {
     private MyPoint v1;

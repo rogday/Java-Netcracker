@@ -1,10 +1,14 @@
-package com.rogday;
+package com.rogday.backend.task4;
 
-import com.rogday.task4.*;
+import com.rogday.backend.task4.mylinkedlist.MyLinkedList;
+import com.rogday.backend.task4.tester.ListTester;
+import com.rogday.backend.task4.tester.MapTester;
+import com.rogday.backend.task4.tester.SetTester;
+import com.rogday.backend.task4.tester.Tester;
 
 import java.util.*;
 
-public class MainCollections {
+public class Main {
     public static void main(String[] args) {
         var test = new MyLinkedList<Integer>();
 

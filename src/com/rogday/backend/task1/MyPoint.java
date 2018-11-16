@@ -1,4 +1,4 @@
-package com.rogday.task1;
+package com.rogday.backend.task1;
 
 public class MyPoint {
     private int x = 0;

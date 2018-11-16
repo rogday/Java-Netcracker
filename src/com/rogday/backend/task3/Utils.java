@@ -1,4 +1,4 @@
-package com.rogday.task3;
+package com.rogday.backend.task3;
 
 import java.util.ArrayList;
 import java.util.Arrays;

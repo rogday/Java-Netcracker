@@ -1,4 +1,4 @@
-package com.rogday.task4;
+package com.rogday.backend.task4.mylinkedlist;
 
 public interface ILinkedList<E> extends Iterable<E> {
     void add(E element);

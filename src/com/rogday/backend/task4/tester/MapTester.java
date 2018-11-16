@@ -1,22 +1,22 @@
-package com.rogday.task4;
+package com.rogday.backend.task4.tester;
 
-import java.util.Set;
+import java.util.Map;
 
-public class SetTester<T extends Set<Integer>> extends Tester<T> {
-    public SetTester(T col) {
-        super(col);
+public class MapTester<T extends Map<Integer, Integer>> extends Tester<T> {
+    public MapTester(T map) {
+        super(map);
     }
 
     @Override
     public void addTest() {
         for (int i = 0; i < N; ++i)
-            col.add(i);
+            col.put(i, array[i]);
     }
 
     @Override
     public void getTest() {
         for (int i = 0; i < N; ++i)
-            col.contains(array[i]);
+            col.get(array[i]);
     }
 
     @Override
