@@ -13,9 +13,9 @@ public class Main {
         System.out.println(method + estimatedTime);
     }
 
-    private static void factEstimate(int n, Function<Integer, Integer> c, String method) {
+    private static void factEstimate(int n, String method, Function<Integer, Integer> f) {
         long startTime = System.nanoTime();
-        long ans = c.apply(15);
+        long ans = f.apply(n);
         long estimatedTime = System.nanoTime() - startTime;
         System.out.println(String.format("%s, 15! = %d, time = %d nanoseconds",
                 method, ans, estimatedTime));
@@ -29,8 +29,8 @@ public class Main {
         sortEstimate(arr, "Arrays.sort(): ", Arrays::sort);
 
         int fact = 15;
-        factEstimate(fact, Utils::factRec, "Recursion");
-        factEstimate(fact, Utils::factIter, "Iteration");
+        factEstimate(fact, "Recursion", Utils::factRec);
+        factEstimate(fact, "Iteration", Utils::factIter);
 
         Utils.drawRect(7, 7);
         Utils.drawFig(7, 7);
